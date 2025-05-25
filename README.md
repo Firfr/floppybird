@@ -21,7 +21,79 @@ Enjoy.尽情享受吧。
 
 https://nebezb.com/floppybird/ (或体验简单模式 [**简单模式**](https://nebezb.com/floppybird/?easy))
 
-### Clones 衍生版本
+
+## 部署说明
+
+首先感谢原作者的开源。[原项目地址](https://github.com/nebez/floppybird)
+
+具体汉化了那些内容，请参考[翻译说明](./翻译说明.md)。
+
+只做了汉化和简单修改，有问题，请到原作者仓库处反馈。
+
+有需要帮忙部署这个项目的朋友,一杯奶茶,即可程远程帮你部署，需要可联系。  
+微信号 `E-0_0-`  
+闲鱼搜索用户 `明月人间`  
+或者邮箱 `firfe163@163.com`  
+如果这个项目有帮到你。欢迎start。
+
+有其他的项目的汉化需求，欢迎提issue。或其他方式联系通知。
+
+### 镜像
+
+从阿里云或华为云镜像仓库拉取镜像，注意填写镜像标签，镜像仓库中没有`latest`标签
+
+容器内部端口 3000 可通过设置环境变量`SERVER_PORT`的值来指定监听端口
+
+```bash
+swr.cn-north-4.myhuaweicloud.com/firfe/floppybird:2025.05.25
+```
+
+### docker run 命令部署
+
+```bash
+docker run -d \
+--name floppybird \
+--network bridge \
+--restart always \
+--log-opt max-size=1m \
+--log-opt max-file=3 \
+-p 3000:3000 \
+swr.cn-north-4.myhuaweicloud.com/firfe/floppybird:2025.05.25
+```
+### compose 文件部署 👍推荐
+
+```yaml
+#version: '3.9'
+services:
+  floppybird:
+    container_name: floppybird
+    image: swr.cn-north-4.myhuaweicloud.com/firfe/floppybird:2025.05.25
+    network_mode: bridge
+    restart: always
+    logging:
+      options:
+        max-size: 1m
+        max-file: '3'
+    ports:
+      - 3000:3000
+```
+
+## 修改说明
+
+这里对除了汉化之外的代码修改的说明。  
+增加修改部分具体见 [修改说明](./修改说明.md)。
+
+`./README.md` 文件翻译，增加 `## 部署说明`、`## 修改说明`、`## 效果截图` 部分。
+
+增加目录 `./图片`
+新增文件 `./.dockerignore`、`./Dockerfile`、`./翻译说明.md`、`./修改说明.md`
+
+## 效果截图
+
+<img src="图片/效果图.png" width="500" />
+
+
+## Clones 衍生版本
 
 * https://wanderingstan.github.io/handybird/
     * **[@wanderinstan](https://github.com/wanderingstan)** enables hand gestures to play using doppler effect and a microphone  
@@ -59,7 +131,7 @@ https://nebezb.com/floppybird/ (或体验简单模式 [**简单模式**](https:/
     * **[@iarunava/flappydragon](https://github.com/iarunava/flappydragon)** redesign flappy bird for Game of Thrones.  
     《权力的游戏》主题重制版
 
-### Notice 声明
+## Notice 声明
 
 The assets powering the visual element of the game have all been extracted directly from the Flappy Bird android game. I do not own the assets, nor do I have explicit permission to use them from their creator. They are the work and copyright of original creator Dong Nguyen and .GEARS games (http://www.dotgears.com/).  
 本游戏视觉元素所使用的资源均直接提取自安卓版《Flappy Bird》。本人不拥有这些素材，也未获得创作者DotGears的明确使用授权（http://www.dotgears.com/），所有素材版权归原作者Dong Nguyen所有。
